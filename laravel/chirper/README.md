@@ -11,6 +11,7 @@ A Twitter-like microblogging app built while following the official Laravel tuto
 - [x] Lesson 6: Database & migrations
 - [x] Lesson 7: First eloquent model
 - [x] Lesson 8: Seeding the database
+- [x] Lesson 9: Creating and storing chirps
 
 ## What I learned
 - Routing with the `Route` facades and Blade views
@@ -20,3 +21,4 @@ A Twitter-like microblogging app built while following the official Laravel tuto
 - Defining tables with migrations and running `php artisan migrate`
 - Eloquent models: mapping the `chirps` table to the `Chirp` class
 - Seeding dummy data with `DatabaseSeeder` and `php artisan db:seed`
+- Validating input with `$request->validate()` and displaying error messages
