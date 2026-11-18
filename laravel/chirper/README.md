@@ -12,6 +12,7 @@ A Twitter-like microblogging app built while following the official Laravel tuto
 - [x] Lesson 7: First eloquent model
 - [x] Lesson 8: Seeding the database
 - [x] Lesson 9: Creating and storing chirps
+- [x] Lesson 10: Editing and deleting chirps
 
 ## What I learned
 - Routing with the `Route` facades and Blade views
