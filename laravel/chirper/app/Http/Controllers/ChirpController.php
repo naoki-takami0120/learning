@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chirp;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 
 class ChirpController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
@@ -20,70 +22,44 @@ class ChirpController extends Controller
         return view('home', ['chirps' => $chirps]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'message' => 'required|string|max:255'
-        ], [
-            'message.required' => 'Please write something to chirp!',
-            'message.max' => 'Chirps must be 255 characters or less.',
+            'message' => 'required|string|max:255',
         ]);
 
-        Chirp::create([
-            'message' => $validated['message']
-        ]);
-        return redirect('/')->with('success', 'Your chirps has been posted!');
+        // Use the authenticated user
+        auth()->user()->chirps()->create($validated);
+
+        return redirect('/')->with('success', 'Your chirp has been posted!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(Chirp $chirp)
     {
-        //
+        $this->authorize('update', $chirp);
+
+        return view('chirps.edit', compact('chirp'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Chirp  $chirp)
-    {
-        return view('/chirps.edit', compact('chirp'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Chirp $chirp)
     {
+        $this->authorize('update', $chirp);
+
         $validated = $request->validate([
-            'message' => 'required|string|max:255'
-        ], [
-            'message.required' => 'Please write something to chirp!',
-            'message.max' => 'Chirps must be 255 characters or less.',
+            'message' => 'required|string|max:255',
         ]);
 
         $chirp->update($validated);
-        return redirect('/')->with('success', 'Your chirps has been updated!');
+
+        return redirect('/')->with('success', 'Chirp updated!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Chirp $chirp)
     {
+        $this->authorize('delete', $chirp);
+
         $chirp->delete();
-        return redirect('/')->with('success', 'Your chirps has been deleted!');
+
+        return redirect('/')->with('success', 'Chirp deleted!');
     }
 }

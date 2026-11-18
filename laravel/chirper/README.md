@@ -13,6 +13,7 @@ A Twitter-like microblogging app built while following the official Laravel tuto
 - [x] Lesson 8: Seeding the database
 - [x] Lesson 9: Creating and storing chirps
 - [x] Lesson 10: Editing and deleting chirps
+- [x] Lesson 11: User registration
 
 ## What I learned
 - Routing with the `Route` facades and Blade views
@@ -23,3 +24,10 @@ A Twitter-like microblogging app built while following the official Laravel tuto
 - Eloquent models: mapping the `chirps` table to the `Chirp` class
 - Seeding dummy data with `DatabaseSeeder` and `php artisan db:seed`
 - Validating input with `$request->validate()` and displaying error messages
+- Route model binding (`Chirp $chirp` resolves the record from the URL)
+- Method spoofing with `@method('PUT')` / `@method('DELETE')` in HTML forms
+- CSRF protection with `@csrf`
+- Pre-filling forms with `old('message', $chirp->message)`
+- Single action controllers (invokable controllers with `__invoke()`)
+- Separating guest and authenticated routes with `guest` / `auth` middleware
+- Hashing passwords and logging in new users with `Auth::login()`
