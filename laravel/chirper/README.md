@@ -14,6 +14,7 @@ A Twitter-like microblogging app built while following the official Laravel tuto
 - [x] Lesson 9: Creating and storing chirps
 - [x] Lesson 10: Editing and deleting chirps
 - [x] Lesson 11: User registration
+- [x] Lesson 12: Login and logout
 
 ## What I learned
 - Routing with the `Route` facades and Blade views
@@ -31,3 +32,5 @@ A Twitter-like microblogging app built while following the official Laravel tuto
 - Single action controllers (invokable controllers with `__invoke()`)
 - Separating guest and authenticated routes with `guest` / `auth` middleware
 - Hashing passwords and logging in new users with `Auth::login()`
+- `$request->session()->regenerate()` issues a new session ID on login while keeping existing session data (prevents session fixation)
+- `redirect()->intended('/')` sends users back to the protected page they originally tried to visit before being redirected to login
